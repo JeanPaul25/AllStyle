@@ -4,8 +4,6 @@
     Author     : sebas
 --%>
 
-<%@page import="java.util.ArrayList"%>
-<%@page import="beans.ProductoBeans"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -61,7 +59,6 @@
         <div class="boton_cart">
             <a href="#" class="">
                 <img src="img/cart2.png" alt="">
-
             </a>
             <span class="contador">10</span>
         </div>
@@ -69,6 +66,9 @@
 
     <div class="contenedor_productos">
         <div class="productos_fila">    
+            <%
+                for (int i = 0; i < 12; i++) {
+                %>
             <div class="productos">
                 <img src="img/tshirt.png"  alt="Avatar" style="">
                 <div class="contenido_producto">
@@ -80,139 +80,11 @@
                    </div>
                 </div>
             </div>
-            <div class="productos">
-                <img src="img/tshirt.png"  alt="Avatar" style="">
-                <div class="contenido_producto">
-                    <p>Producto:</p>
-                    <p>Precio:</p>
-                    <p>Categoria:</p> 
-                   <div class="btn_productos">
-                    <a id="añadir" href="#"> <i class="fa-solid fa-cart-shopping"></i> Añadir </a>
-                   </div>
-                </div>
-            </div>
-            <div class="productos">
-                <img src="img/tshirt.png"  alt="Avatar" style="">
-                <div class="contenido_producto">
-                    <p>Producto:</p>
-                    <p>Precio:</p>
-                    <p>Categoria:</p> 
-                   <div class="btn_productos">
-                    <a id="añadir" href="#"> <i class="fa-solid fa-cart-shopping"></i> Añadir </a>
-                   </div>
-                </div>
-            </div>
-            <div class="productos">
-                <img src="img/tshirt.png"  alt="Avatar" style="">
-                <div class="contenido_producto">
-                    <p>Producto:</p>
-                    <p>Precio:</p>
-                    <p>Categoria:</p> 
-                   <div class="btn_productos">
-                    <a id="añadir" href="#"> <i class="fa-solid fa-cart-shopping"></i> Añadir </a>
-                   </div>
-                </div>
-            </div>
-            <div class="productos">
-                <img src="img/tshirt.png"  alt="Avatar" style="">
-                <div class="contenido_producto">
-                    <p>Producto:</p>
-                    <p>Precio:</p>
-                    <p>Categoria:</p> 
-                   <div class="btn_productos">
-                    <a id="añadir" href="#"> <i class="fa-solid fa-cart-shopping"></i> Añadir </a>
-                   </div>
-                </div>
-            </div>
-            <div class="productos">
-                <img src="img/tshirt.png"  alt="Avatar" style="">
-                <div class="contenido_producto">
-                    <p>Producto:</p>
-                    <p>Precio:</p>
-                    <p>Categoria:</p> 
-                   <div class="btn_productos">
-                    <a id="añadir" href="#"> <i class="fa-solid fa-cart-shopping"></i> Añadir </a>
-                   </div>
-                </div>
-            </div>
-            <div class="productos">
-                <img src="img/tshirt.png"  alt="Avatar" style="">
-                <div class="contenido_producto">
-                    <p>Producto:</p>
-                    <p>Precio:</p>
-                    <p>Categoria:</p> 
-                   <div class="btn_productos">
-                    <a id="añadir" href="#"> <i class="fa-solid fa-cart-shopping"></i> Añadir </a>
-                   </div>
-                </div>
-            </div>
-            <div class="productos">
-                <img src="img/tshirt.png"  alt="Avatar" style="">
-                <div class="contenido_producto">
-                    <p>Producto:</p>
-                    <p>Precio:</p>
-                    <p>Categoria:</p> 
-                   <div class="btn_productos">
-                    <a id="añadir" href="#"> <i class="fa-solid fa-cart-shopping"></i> Añadir </a>
-                   </div>
-                </div>
-            </div>
-            <div class="productos">
-                <img src="img/tshirt.png"  alt="Avatar" style="">
-                <div class="contenido_producto">
-                    <p>Producto:</p>
-                    <p>Precio:</p>
-                    <p>Categoria:</p> 
-                   <div class="btn_productos">
-                    <a id="añadir" href="#"> <i class="fa-solid fa-cart-shopping"></i> Añadir </a>
-                   </div>
-                </div>
-            </div>
-            <div class="productos">
-                <img src="img/tshirt.png"  alt="Avatar" style="">
-                <div class="contenido_producto">
-                    <p>Producto:</p>
-                    <p>Precio:</p>
-                    <p>Categoria:</p> 
-                   <div class="btn_productos">
-                    <a id="añadir" href="#"> <i class="fa-solid fa-cart-shopping"></i> Añadir </a>
-                   </div>
-                </div>
-            </div>
-            <div class="productos">
-                <img src="img/tshirt.png"  alt="Avatar" style="">
-                <div class="contenido_producto">
-                    <p>Producto:</p>
-                    <p>Precio:</p>
-                    <p>Categoria:</p> 
-                   <div class="btn_productos">
-                    <a id="añadir" href="#"> <i class="fa-solid fa-cart-shopping"></i> Añadir </a>
-                   </div>
-                </div>
-            </div>
-
-            <div class="productos">
-                <img  src="img/tshirt.png"  alt="Avatar" style="">
-                <div class="contenido_producto">
-                    <p>Producto:</p>
-                    <p>Precio:</p>
-                    <p>Categoria:</p> 
-                   <div class="btn_productos">
-                    <a id="añadir" href="#"><i class="fa-solid fa-cart-shopping"></i> Añadir </a>
-                   </div>
-                </div>
-            </div>
-           
-           
-               
+            <%
+                }
+                %>
         </div>       
     </div>
-
-
-
-
-
-
 
     <!-- Login -->
      <div class="contenedor_modal" id="ventana_login" >    

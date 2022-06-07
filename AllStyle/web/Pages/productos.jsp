@@ -18,10 +18,11 @@
 </head>
 
 <body>
+    
     <header class="header">
         <div class="header_1">
             <div class="titulo_header">
-                <a href="#">
+                <a href="index.jsp">
                     <h1>All Style</h1>
                 </a>
             </div>
@@ -33,7 +34,11 @@
                 </ul>
             </div>
         </div>
-
+        
+        <%
+            if(1==1){
+            %>
+        
         <div class="header_2">
             <div class="header_2_a_1">
                 <a id="Login" style="cursor: pointer;"><i class="fa-regular fa-user"></i> <span> Iniciar Sesion</span></a>
@@ -43,7 +48,26 @@
             </div>
         </div>
 
+        <%
+            }else{
+            %>
+        
+        <div class="header_2">
+            <div class="header_2_a_1">
+                <a id="#" style="cursor: pointer;"><i class="fa-regular fa-user"></i> <span> </span></a>
+            </div>
+            <div class="header_2_a_2">
+                <a href="#"> <img src="img/cart.png" alt=""><span>(10)</span></a>
+            </div>
+        </div>  
+            
+        <%
+            }
+            %>
 
+            
+            
+            
     </header>
 
 

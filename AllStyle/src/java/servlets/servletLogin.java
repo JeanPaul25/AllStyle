@@ -48,7 +48,10 @@ public class servletLogin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
+
+        HttpSession session = request.getSession();
+        session.invalidate();
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     /**
