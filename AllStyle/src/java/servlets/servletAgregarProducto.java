@@ -84,8 +84,7 @@ public class servletAgregarProducto extends HttpServlet {
             
             ArrayList array = new ArrayList<>();
             int a = 0;
-            String imagen = null;
-                        
+            String imagen = null;              
             for(int i=0;i<items.size();i++){
                 FileItem item = (FileItem) items.get(i);
                 if (item.isFormField()){                    
