@@ -1,6 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="beans.ProductoBeans"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,7 +18,10 @@
     <link rel="shortcut icon" href="img/tshirt.png" type="image/x-icon">
 </head>
 
-<body>
+<body>      
+    <%
+        String usuario = (String)session.getAttribute("usuario");
+    %>
     
     <header class="header">
         <div class="header_1">
@@ -36,12 +40,12 @@
         </div>
         
         <%
-            if(1==1){
+            if(usuario == null){
             %>
         
         <div class="header_2">
             <div class="header_2_a_1">
-                <a id="Login" style="cursor: pointer;"><i class="fa-regular fa-user"></i> <span> Iniciar Sesion</span></a>
+                <a id="Login" style="cursor: pointer;"><i class="fa-regular fa-user"></i> <span> Iniciar Sesion </span></a>
             </div>
             <div class="header_2_a_2">
                 <a href="#"> <img src="img/cart.png" alt=""><span>(10)</span></a>
@@ -53,11 +57,11 @@
             %>
         
         <div class="header_2">
-            <div class="header_2_a_1">
-                <a id="#" style="cursor: pointer;"><i class="fa-regular fa-user"></i> <span> </span></a>
+            <div class="header_2_a_1" style="margin-top: 13px;">
+                <a id="Login" style="cursor: pointer;" href="servletLogin?method=GET"><i class="fa-regular fa-user"></i> <span> <%=usuario%> </span></a>
             </div>
             <div class="header_2_a_2">
-                <a href="#"> <img src="img/cart.png" alt=""><span>(10)</span></a>
+                <a href="#" onclick="AbrirNav()"> <img src="img/bars.png" alt=""> </a>
             </div>
         </div>  
             
@@ -65,9 +69,6 @@
             }
             %>
 
-            
-            
-            
     </header>
 
 
@@ -110,7 +111,32 @@
             }
             %>   
            
+        <!-- Login -->
+        <div class="contenedor_modal" id="ventana_login" >    
+               <form action="servletLogin" class="form" method="POST">
+                   <a id="CerrarVentana" class="cerrar_login"><img src="img/close.png" alt=""></a>
+                   <h1 class="titulo_login">All Style</h1>
+                   <div class="label input">
+                       <label>Email</label>
+                       <input type="text" name="fEmail">
+                   </div>
+                   <div class="label input">
+                       <label>Contraseña</label>
+                       <input type="password" name="fPassword">
+                   </div>
+                   <div class="btn_login">
+                       <button type="submit">Iniciar Sesion</button>
+                       <a id="registrarVentana">Registrar</a>
+                   </div>
+                   <p class="msg">Tu Contraseña Es privada !No lo Compartas¡</p>
+               </form>    
+       </div>     
+            
                
         </div>       
     </div>
+            
+    <script src="js/modal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>  
 </html>

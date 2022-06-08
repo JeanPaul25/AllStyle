@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true"%>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -23,6 +24,11 @@
 </head>
 
 <body>
+        
+    <%
+        String usuario = (String)session.getAttribute("usuario");
+    %>
+    
     <header class="header">
         <div class="header_1">
             <div class="titulo_header">
@@ -39,14 +45,35 @@
             </div>
         </div>
 
+        <%
+            if(usuario == null){
+            %>
+        
         <div class="header_2">
             <div class="header_2_a_1">
-                <a id="Login" style="cursor: pointer;"><i class="fa-regular fa-user"></i> <span> Iniciar Sesion</span></a>
+                <a id="Login" style="cursor: pointer;"><i class="fa-regular fa-user"></i> <span> Iniciar Sesion </span></a>
             </div>
             <div class="header_2_a_2">
                 <a href="#"> <img src="img/cart.png" alt=""><span>(10)</span></a>
             </div>
         </div>
+
+        <%
+            }else{
+            %>
+        
+        <div class="header_2">
+            <div class="header_2_a_1" style="margin-top: 13px;">
+                <a id="Login" style="cursor: pointer;" href="servletLogin?method=GET"><i class="fa-regular fa-user"></i> <span> <%=usuario%> </span></a>
+            </div>
+            <div class="header_2_a_2">
+                <a href="#" onclick="AbrirNav()"> <img src="img/bars.png" alt=""> </a>
+            </div>
+        </div>  
+            
+        <%
+            }
+            %>
 
 
     </header>

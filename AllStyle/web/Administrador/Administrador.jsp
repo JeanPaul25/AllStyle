@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,10 +26,11 @@
     <%
         String usuario = (String)session.getAttribute("usuario");
     %>
+    
     <header class="header" id="main">
         <div class="header_1">
             <div class="titulo_header">
-                <a href="#">
+                <a href="index.jsp">
                     <h1>All Style</h1>
                 </a>
             </div>
