@@ -27,6 +27,9 @@ import utils.conexionDB;
 @WebServlet(name = "CRUDAdministrador", urlPatterns = {"/CRUDAdministrador"})
 public class CRUDAdministrador extends HttpServlet {
     List usuario = new ArrayList();
+    List cantC = new ArrayList();
+     List cantA = new ArrayList();
+    
     Usuarios user= new Usuarios();
     AdminDAO adao = new AdminDAO();
     /**
@@ -47,17 +50,31 @@ public class CRUDAdministrador extends HttpServlet {
         switch(Accion){
             case "ListarUsuario":
                 usuario = adao.ListarUsuario();
+                cantA = adao.CantidadAdmin();
+                cantC = adao.CantidadCliente();
+                 request.setAttribute("cantidadC", cantC.size());
+                  request.setAttribute("cantA", cantA.size());
+                request.setAttribute("cantidad", usuario.size());
                 request.setAttribute("ListUser", usuario);
                 request.getRequestDispatcher("Administrador/AdministracionUsuarios.jsp").forward(request, response);
-           
                 break;
             case "BuscarUsuario":
                 break;
-            case "EliminarUsuario":
+            case "Eliminar":
+                String DNI = request.getParameter("DNI");
+                try {
+                    ps = conexionDB.getConexion().prepareStatement("delete  from usuarios where dni=?");
+                    ps.setString(1, DNI);
+                    ps.executeUpdate();
+
+                } catch (Exception e) {
+                }
+                request.getRequestDispatcher("CRUDAdministrador?Accion=ListarUsuario").forward(request, response);
                 break;
             case "InsertUsuarioAdmin":
                 break;
             default:
+                 request.getRequestDispatcher("Administrador/DashBoard.jsp").forward(request, response);
     }
     }
 

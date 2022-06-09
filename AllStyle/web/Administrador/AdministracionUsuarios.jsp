@@ -115,19 +115,19 @@
                     <div class="col-sm-3 caja">
                         <div class="well">
                             <h4>Cantidad de Usuarios</h4>
-                            <p>30 usuarios</p>
+                            <p>${cantidad} </p>
                         </div>
                     </div>
                     <div class="col-sm-3 caja">
                         <div class="well">
                             <h4>Cantidad de Clientes</h4>
-                            <p>10 clientes</p>
+                            <p>${cantidadC} </p>
                         </div>
                     </div>
                     <div class="col-sm-3 caja">
                         <div class="well">
                             <h4>Cantidad de Administradores</h4>
-                            <p>20 Admins</p>
+                            <p>${cantA} </p>
                         </div>
                     </div>
                 </div>
@@ -166,7 +166,7 @@
                                 <td>
                                     <a href="#" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalEditarLogin"><span data-feather="settings"></span>Editar</a>
                                     
-                                    <a id="" class="btn btn-danger"><span data-feather="trash-2"></span>Eliminar</a>
+                                    <a id="" href="CRUDAdministrador?Accion=Eliminar&DNI=${list.getDNI()}" class="btn btn-danger"><span data-feather="trash-2"></span>Eliminar</a>
                                 </td>
                             </tr>
                             </c:forEach>
