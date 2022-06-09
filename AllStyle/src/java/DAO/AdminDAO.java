@@ -15,6 +15,31 @@ import java.util.List;
 public class AdminDAO {
     ResultSet rs;
     PreparedStatement ps;
+    public List BuscarUsuario(String DNI){
+            ArrayList<Usuarios> listU = new ArrayList<>();
+                try {
+                    ps = conexionDB.getConexion().prepareStatement("select * from usuarios where dni=?");
+                    ps.setString(1, DNI);
+                    rs= ps.executeQuery();
+                   
+                    while (rs.next()) {
+                       Usuarios u = new Usuarios();
+                        u.setDNI(rs.getString(1));
+                        u.setNombre(rs.getString(2));
+                        u.setApellido(rs.getString(3));
+                        u.setTelefono(rs.getString(4));
+                        u.setCorreo(rs.getString(5));
+                        u.setContraseña(rs.getString(6));
+                        u.setRol(rs.getString(7));
+                        u.setFnacimiento(rs.getString(8));
+                        listU.add(u);
+                      
+                    }
+                   
+                } catch (Exception e) {
+                }
+        return listU;
+    }
     public List ListarUsuario(){
          ArrayList<Usuarios> ListarUsuario = new ArrayList<>();
         

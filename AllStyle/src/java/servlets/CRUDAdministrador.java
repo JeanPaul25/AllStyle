@@ -43,22 +43,25 @@ public class CRUDAdministrador extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         PreparedStatement ps ;
+        PreparedStatement ps ;
         ResultSet rs;
         String Accion = request.getParameter("Accion");
-        
         switch(Accion){
             case "ListarUsuario":
                 usuario = adao.ListarUsuario();
                 cantA = adao.CantidadAdmin();
                 cantC = adao.CantidadCliente();
-                 request.setAttribute("cantidadC", cantC.size());
-                  request.setAttribute("cantA", cantA.size());
+                request.setAttribute("cantidadC", cantC.size());
+                request.setAttribute("cantA", cantA.size());
                 request.setAttribute("cantidad", usuario.size());
                 request.setAttribute("ListUser", usuario);
                 request.getRequestDispatcher("Administrador/AdministracionUsuarios.jsp").forward(request, response);
                 break;
             case "BuscarUsuario":
+               String id = request.getParameter("dni");
+                usuario = adao.BuscarUsuario(id);
+                request.setAttribute("Buscar", usuario);
+                 request.getRequestDispatcher("Administrador/EditarUsuario.jsp").forward(request, response);
                 break;
             case "Eliminar":
                 String DNI = request.getParameter("DNI");
@@ -71,7 +74,29 @@ public class CRUDAdministrador extends HttpServlet {
                 }
                 request.getRequestDispatcher("CRUDAdministrador?Accion=ListarUsuario").forward(request, response);
                 break;
-            case "InsertUsuarioAdmin":
+            case "Editar":
+                String dni = request.getParameter("dni");
+                String nombre = request.getParameter("nombre");
+                String apellido = request.getParameter("apellido");
+                String telefono = request.getParameter("telefono");
+                String pass = request.getParameter("pass");
+                String correo = request.getParameter("correo");
+                String rol = request.getParameter("rol");
+                String fnacimiento = request.getParameter("fnacimiento");
+                try {
+                    ps = conexionDB.getConexion().prepareStatement("update usuarios(dni=?,nombre=?,apellido=?,telefono=?,correo=?,contraseña=?,rol=?,nacimiento=?)");
+                    ps.setString(1, dni);
+                    ps.setString(2, nombre);
+                    ps.setString(3, apellido);
+                    ps.setString(4, telefono);
+                    ps.setString(5, correo);
+                    ps.setString(6, pass);
+                    ps.setString(7, rol);
+                    ps.setString(8, fnacimiento);
+                    ps.executeUpdate();
+                    request.getRequestDispatcher("CRUDAdministrador?Accion=ListarUsuario").forward(request, response);
+                } catch (Exception e) {
+                }
                 break;
             default:
                  request.getRequestDispatcher("Administrador/DashBoard.jsp").forward(request, response);
@@ -104,7 +129,33 @@ public class CRUDAdministrador extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        PreparedStatement ps;
+        ResultSet rs;
+                String dni = request.getParameter("dni");
+                String nombre = request.getParameter("nombre");
+                String apellido = request.getParameter("apellido");
+                String telefono = request.getParameter("telefono");
+                String pass = request.getParameter("pass");
+                String correo = request.getParameter("correo");
+                String rol = request.getParameter("rol");
+                String fnacimiento = request.getParameter("fnacimiento");
+                try {
+                ps = conexionDB.getConexion().prepareStatement("insert into usuarios values(?,?,?,?,?,?,?,?)");
+                ps.setString(1, dni);
+                ps.setString(2, nombre);
+                ps.setString(3, apellido);
+                ps.setString(4, telefono);
+                ps.setString(5, correo);
+                ps.setString(6, pass);
+                ps.setString(7, rol);
+                ps.setString(8, fnacimiento);
+                ps.executeUpdate();
+                request.getRequestDispatcher("CRUDAdministrador?Accion=ListarUsuario").forward(request, response);
+                } catch (Exception e) {
+                    
+                }
+        
     }
 
     /**

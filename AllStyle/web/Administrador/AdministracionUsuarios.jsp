@@ -65,7 +65,7 @@
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column color_li">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">
+                            <a class="nav-link active" aria-current="page" href="CRUDAdministrador?Accion=Dashboard">
                                 <span data-feather="home"></span>
                                 Dashboard
                             </a>
@@ -132,11 +132,11 @@
                     </div>
                 </div>
 
-
+                        <br><br>
                 <!-- tabla usuarios -->
                 <div class="container" style="overflow-x:auto;">
                     <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalInsertarLogin"> Registrar
-                        Nuevo Usuario Administrador<p data-feather="plus"></p></a>  <br> <br>
+                        Nuevo Usuario Administrador</a>  <br> <br>
                         <table class="table">
                         <thead class="thead-dark">
                             <tr>
@@ -164,8 +164,7 @@
                                 <td>${list.getRol()}</td>
                                 <td>${list.getFnacimiento()}</td>
                                 <td>
-                                    <a href="#" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalEditarLogin"><span data-feather="settings"></span>Editar</a>
-                                    
+                                    <a href="CRUDAdministrador?Accion=BuscarUsuario&dni=${list.getDNI()}" class="btn btn-dark"  data-bs-toggle="" data-bs-target="" >Editar</a>
                                     <a id="" href="CRUDAdministrador?Accion=Eliminar&DNI=${list.getDNI()}" class="btn btn-danger"><span data-feather="trash-2"></span>Eliminar</a>
                                 </td>
                             </tr>
@@ -183,39 +182,46 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
-                                <form action="">
+                                <form action="CRUDAdministrador" method="post">
                                     <div class="modal-body">
                                         <div class="">
                                             <label for="">DNI</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" name="dni">
                                         </div>
                                         <div>
                                             <label for="">Nombre</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" name="nombre">
                                         </div>
                                         <div>
-                                            <label for="">Correo</label>
-                                            <input type="text" class="form-control">
+                                            <label for="">Apellido</label>
+                                            <input type="text" class="form-control" name="apellido">
                                         </div>
                                         <div>
                                             <label for="">Telefono</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" name="telefono">
+                                        </div>
+                                         <div>
+                                            <label for="">Correo</label>
+                                            <input type="text" class="form-control" name="correo">
                                         </div>
                                         <div>
                                             <label for="">contraseña</label>
-                                            <input type="text" class="form-control">
-                                        </div>
+                                            <input type="text" class="form-control" name="pass">
+                                        </div>  
                                         <div>
-                                            <label for="">Rol</label>
-                                            <input type="text" class="form-control">
-                                        </div>
+                                            <label for="">rol</label>
+                                            <select name="rol" id="" class="form-control">
+                                                <option value="admin">Admin</option>
+                                                <option value="cliente">Cliente</option>
+                                            </select>
+                                        </div>                                    
                                         <div>
                                             <label for="">Fecha de Nacimiento</label>
-                                            <input type="date" class="form-control">
+                                            <input type="date" class="form-control" name="fnacimiento">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary">Registrar Usuario</button>
+                                        <input type="submit" value="Registrar" name="Accion" class="btn btn-primary">
                                         <a type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</a>
                                     </div>
                                 </form>
@@ -223,54 +229,64 @@
                         </div>
                     </div>
                     <!-- Modal Editar Usuario -->
-                    <div class="modal fade" id="ModalEditarLogin" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                    <div class="modal fade" id="BuscarUser" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Registrar Nuevo Usuario Administrador</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <c:forEach var="var" items="${Buscar}">
+                                    <form action="CRUDAdministrador" method="">
+                                    <div class="modal-body">
+                                        <div class="">
+                                            <label for="">${var.getDNI()}</label>
+                                            <input type="text" class="form-control" value="">
+                                        </div>
+                                        <div>
+                                            <label for="">Nombre</label>
+                                            <input type="text" class="form-control" name="nombre">
+                                        </div>
+                                        <div>
+                                            <label for="">Apellido</label>
+                                            <input type="text" class="form-control" name="apellido">
+                                        </div>
+                                        <div>
+                                            <label for="">Telefono</label>
+                                            <input type="text" class="form-control" name="telefono">
+                                        </div>
+                                         <div>
+                                            <label for="">Correo</label>
+                                            <input type="text" class="form-control" name="correo">
+                                        </div>
+                                        <div>
+                                            <label for="">contraseña</label>
+                                            <input type="text" class="form-control" name="pass">
+                                        </div>  
+                                        <div>
+                                            <label for="">rol</label>
+                                            <select name="rol" id="" class="form-control">
+                                                <option value="admin">Admin</option>
+                                                <option value="cliente">Cliente</option>
+                                            </select>
+                                        </div>                                    
+                                        <div>
+                                            <label for="">Fecha de Nacimiento</label>
+                                            <input type="date" class="form-control" name="fnacimiento">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="submit" value="" name="Accion" class="btn btn-primary">
+                                        <a type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</a>
+                                    </div>
+                                </form>
+                                </c:forEach>
+                                
                             </div>
-                            <form action="">
-                                <div class="modal-body">
-                                    <div class="">
-                                        <label for="">DNI</label>
-                                        <input type="text" class="form-control" value="DNI">
-                                    </div>
-                                    <div>
-                                        <label for="">Nombre</label>
-                                        <input type="text" class="form-control" value="Nombre">
-                                    </div>
-                                    <div>
-                                        <label for="">Correo</label>
-                                        <input type="text" class="form-control" value="Correo">
-                                    </div>
-                                    <div>
-                                        <label for="">Telefono</label>
-                                        <input type="text" class="form-control" value="Telefono">
-                                    </div>
-                                    <div>
-                                        <label for="">contraseña</label>
-                                        <input type="text" class="form-control" value="contraseña">
-                                    </div>
-                                    <div>
-                                        <label for="">Rol</label>
-                                        <input type="text" class="form-control" value="Rol">
-                                    </div>
-                                    <div>
-                                        <label for="">Fecha de Nacimiento</label>
-                                        <input type="date" class="form-control" value="12-10-200">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">Editar Usuario</button>
-                                    <a type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</a>
-                                </div>
-                            </form>
                         </div>
                     </div>
-                </div>
                 </div>
             </main>
         </div>
