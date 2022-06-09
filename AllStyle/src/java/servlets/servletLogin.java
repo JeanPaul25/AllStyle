@@ -93,7 +93,7 @@ public class servletLogin extends HttpServlet {
                 if(rsLogin.getString(7).equals("Cliente")){
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 }else{
-                    request.getRequestDispatcher("Administrador/Administrador.jsp").forward(request, response);
+                    request.getRequestDispatcher("Administrador/DashBoard.jsp").forward(request, response);
                 }                
             }            
         } catch (IOException | SQLException | ServletException e) {

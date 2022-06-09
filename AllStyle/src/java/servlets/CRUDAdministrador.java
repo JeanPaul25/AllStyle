@@ -5,23 +5,30 @@
  */
 package servlets;
 
+import DAO.AdminDAO;
+import beans.Usuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utils.conexionDB;
 
 /**
  *
  * @author sebas
  */
-@WebServlet(name = "CRUDAdminitrador", urlPatterns = {"/CRUDAdminitrador"})
+@WebServlet(name = "CRUDAdministrador", urlPatterns = {"/CRUDAdministrador"})
 public class CRUDAdministrador extends HttpServlet {
-
+    List usuario = new ArrayList();
+    Usuarios user= new Usuarios();
+    AdminDAO adao = new AdminDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,12 +40,16 @@ public class CRUDAdministrador extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PreparedStatement ps ;
+         PreparedStatement ps ;
         ResultSet rs;
         String Accion = request.getParameter("Accion");
         
         switch(Accion){
             case "ListarUsuario":
+                usuario = adao.ListarUsuario();
+                request.setAttribute("ListUser", usuario);
+                request.getRequestDispatcher("Administrador/AdministracionUsuarios.jsp").forward(request, response);
+           
                 break;
             case "BuscarUsuario":
                 break;
@@ -47,14 +58,7 @@ public class CRUDAdministrador extends HttpServlet {
             case "InsertUsuarioAdmin":
                 break;
             default:
-                
-        }
-               
-         
-          
-        
-        
-        
+    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
