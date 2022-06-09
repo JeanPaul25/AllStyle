@@ -114,58 +114,48 @@
                 <div class="row container centro_administrador">
                     <div class="col-sm-3 caja">
                         <div class="well">
-                            <h4>Cantidad de Usuarios</h4>
-                            <p>${cantidad} </p>
+                            <h4>Cantidad de Productos</h4>
+                            <p>${cantidadP} </p>
                         </div>
                     </div>
-                    <div class="col-sm-3 caja">
-                        <div class="well">
-                            <h4>Cantidad de Clientes</h4>
-                            <p>${cantidadC} </p>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 caja">
-                        <div class="well">
-                            <h4>Cantidad de Administradores</h4>
-                            <p>${cantA} </p>
-                        </div>
-                    </div>
+                   
+                   
                 </div>
 
                         <br><br>
                 <!-- tabla usuarios -->
                 <div class="container" style="overflow-x:auto;">
                     <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalInsertarLogin"> Registrar
-                        Nuevo Usuario Administrador</a>  <br> <br>
+                      Nuevo Producto</a>  <br> <br>
                         <table class="table">
                         <thead class="thead-dark">
                             <tr>
-                                <th scope="col">DNI</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Apellido</th>
-                                <th scope="col">Telefono</th>
-                                <th scope="col">Correo </th>
-                                <th scope="col">Contraseña</th>
-                                <th scope="col">Rol</th>
-                                <th scope="col">Fecha de Nacimiento</th>
+                                <th scope="col">ID Producto</th>
+                                <th scope="col">Nombre Producto</th>
+                                <th scope="col">Descripcion</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Precio unidad </th>
+                                <th scope="col">Genero</th>
+                                <th scope="col">Categoria</th>
+                                <th scope="col">Imagen</th>
                                 <th scope="col">Accion</th>
 
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="list" items="${ListUser}">
+                            <c:forEach var="p" items="${ListProductos}">
                             <tr>                            
-                                <td>${list.getDNI()}</td>
-                                <td>${list.getNombre()}</td>
-                                <td>${list.getApellido()}</td>
-                                <td>${list.getTelefono()}</td>
-                                <td>${list.getCorreo()}</td>
-                                <td>${list.getContraseña()}</td>
-                                <td>${list.getRol()}</td>
-                                <td>${list.getFnacimiento()}</td>
+                                <td>${p.getIdProducto()}</td>
+                                <td>${p.getNombreP()}</td>
+                                <td>${p.getDescP()}</td>
+                                <td>${p.getStock()}</td>
+                                <td>${p.getPrecio()}</td>
+                                <td>${p.getGenero()}</td>
+                                <td>${p.getCategoria()}</td>
+                                <td>${p.getImagen()}</td>
                                 <td>
-                                    <a href="CRUDAdministrador?Accion=BuscarUsuario&dni=${list.getDNI()}" class="btn btn-dark"  data-bs-toggle="" data-bs-target="" >Editar</a>
-                                    <a id="" href="CRUDAdministrador?Accion=Eliminar&DNI=${list.getDNI()}" class="btn btn-danger"><span data-feather="trash-2"></span>Eliminar</a>
+                                    <a href="CRUDAdministrador?Accion=BuscarProducto&idp=${p.getIdProducto()}" class="btn btn-dark"  data-bs-toggle="" data-bs-target="" >Editar</a>
+                                    <a id="" href="CRUDAdministrador?Accion=EliminarProducto&idp=${p.getIdProducto()}" class="btn btn-danger"><span data-feather="trash-2"></span>Eliminar</a>
                                 </td>
                             </tr>
                             </c:forEach>
@@ -178,50 +168,60 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Registrar Nuevo Usuario Administrador</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Registrar Nuevo Producto</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <form action="CRUDAdministrador" method="post">
                                     <div class="modal-body">
                                         <div class="">
-                                            <label for="">DNI</label>
-                                            <input type="text" class="form-control" name="dni">
+                                            <label for="">ID Producto</label>
+                                            <input type="text" class="form-control" name="idproducto">
                                         </div>
                                         <div>
-                                            <label for="">Nombre</label>
-                                            <input type="text" class="form-control" name="nombre">
+                                            <label for="">Nombre Producto</label>
+                                            <input type="text" class="form-control" name="nombrep">
                                         </div>
                                         <div>
-                                            <label for="">Apellido</label>
-                                            <input type="text" class="form-control" name="apellido">
+                                            <label for="">Descripcion</label>
+                                            <input type="text" class="form-control" name="descp">
                                         </div>
                                         <div>
-                                            <label for="">Telefono</label>
-                                            <input type="text" class="form-control" name="telefono">
+                                            <label for="">Stock</label>
+                                            <input type="text" class="form-control" name="stock">
                                         </div>
                                          <div>
-                                            <label for="">Correo</label>
-                                            <input type="text" class="form-control" name="correo">
+                                            <label for="">Precio</label>
+                                            <input type="text" class="form-control" name="precio">
                                         </div>
                                         <div>
-                                            <label for="">contraseña</label>
-                                            <input type="text" class="form-control" name="pass">
+                                            <label for="">Genero</label>                                         
+                                            <select name="genero" id="" class="form-control" >
+                                                <option value="O">Sin Especificar</option>
+                                                <option value="F">Femenino</option>
+                                                <option value="M">Masculino</option>
+                                            </select>
                                         </div>  
                                         <div>
-                                            <label for="">rol</label>
-                                            <select name="rol" id="" class="form-control">
-                                                <option value="admin">Admin</option>
-                                                <option value="cliente">Cliente</option>
+                                            <label for="">Categoria</label>                                            
+                                             <select name="categoria" id="" class="form-control" >
+                                                <option value="Accesorios">Accesorios</option>
+                                                <option value="Poleras">Poleras</option>
+                                                <option value="Polo">Polo</option>
+                                                <option value="Buzo">Buzo</option>
+                                                <option value="Short">Short</option>
+                                                <option value="Media">Media</option>
+                                                <option value="Zapatilla">Zapatilla</option>
+                                                
                                             </select>
                                         </div>                                    
                                         <div>
-                                            <label for="">Fecha de Nacimiento</label>
-                                            <input type="date" class="form-control" name="fnacimiento">
+                                            <label for="">Imagen</label>
+                                            <input type="text" class="form-control" name="imagen">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button value="Registrar" name="accion" class="btn btn-primary">Registrar</button>
+                                        <button value="InsertProducto" name="accion" class="btn btn-primary">Registrar Producto</button>
                                         <a type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</a>
                                     </div>
                                 </form>
@@ -278,7 +278,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <input type="submit" value="" name="Accion" class="btn btn-primary">
+                                        
+                                        <button value="InsertProducto" name="accion" class="btn btn-primary">Registrar</button>
                                         <a type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</a>
                                     </div>
                                 </form>

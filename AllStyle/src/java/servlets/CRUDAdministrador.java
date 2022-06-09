@@ -6,6 +6,9 @@
 package servlets;
 
 import DAO.AdminDAO;
+import beans.Boletas;
+import beans.DetallesBoleta;
+import beans.Productos;
 import beans.Usuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,8 +31,13 @@ import utils.conexionDB;
 public class CRUDAdministrador extends HttpServlet {
     List usuario = new ArrayList();
     List cantC = new ArrayList();
-     List cantA = new ArrayList();
-    
+    List cantA = new ArrayList();
+    List p = new ArrayList();
+    List Bol = new ArrayList();
+    List detalles = new ArrayList();
+    DetallesBoleta detB  = new DetallesBoleta();
+    Boletas boletas = new Boletas();
+    Productos productos = new Productos();
     Usuarios user= new Usuarios();
     AdminDAO adao = new AdminDAO();
     /**
@@ -47,6 +55,46 @@ public class CRUDAdministrador extends HttpServlet {
         ResultSet rs;
         String Accion = request.getParameter("Accion");
         switch(Accion){
+            case "ListarBoleta":
+                Bol = adao.ListarBoleta();
+                 request.setAttribute("ListarBoletas", Bol);
+                  request.getRequestDispatcher("Administrador/AdministracionBoletas.jsp").forward(request, response);
+                break;
+            case "BuscarBoleta":
+                String IDboleta = request.getParameter("IDboleta");
+                Bol = adao.BuscarBoleta(IDboleta);
+                detalles = adao.DetallesBol(IDboleta);
+                request.setAttribute("detalles", detalles);
+                request.setAttribute("BuscarBoleta", Bol);
+                 request.getRequestDispatcher("Administrador/EditarBoleta.jsp").forward(request, response);
+                break;
+            case "ListarProducto":
+                 p = adao.ListarProducto();
+                 request.setAttribute("cantidadP", p.size());
+                 request.setAttribute("ListProductos", p);
+                 request.getRequestDispatcher("Administrador/AdministracionProducto.jsp").forward(request, response);
+                break;
+            case "BuscarProducto":
+                String idp = request.getParameter("idp");
+                p = adao.BuscarP(idp);
+                request.setAttribute("Buscar", p);
+                 request.getRequestDispatcher("Administrador/EditarProducto.jsp").forward(request, response);
+                break;
+            case "EliminarProducto":
+                 String idProducto = request.getParameter("idp");
+                try {
+                    ps = conexionDB.getConexion().prepareStatement("delete  from productos where idproducto=?");
+                    ps.setString(1, idProducto);
+                    ps.executeUpdate();
+
+                } catch (Exception e) {
+                }
+                request.getRequestDispatcher("CRUDAdministrador?Accion=ListarProducto").forward(request, response);
+                break;
+            case "":
+              
+                break;
+                
             case "ListarUsuario":
                 usuario = adao.ListarUsuario();
                 cantA = adao.CantidadAdmin();
@@ -58,7 +106,7 @@ public class CRUDAdministrador extends HttpServlet {
                 request.getRequestDispatcher("Administrador/AdministracionUsuarios.jsp").forward(request, response);
                 break;
             case "BuscarUsuario":
-               String id = request.getParameter("dni");
+                 String id = request.getParameter("dni");
                 usuario = adao.BuscarUsuario(id);
                 request.setAttribute("Buscar", usuario);
                  request.getRequestDispatcher("Administrador/EditarUsuario.jsp").forward(request, response);
@@ -132,7 +180,9 @@ public class CRUDAdministrador extends HttpServlet {
         
         PreparedStatement ps;
         ResultSet rs;
-                String dni = request.getParameter("dni");
+        String Accionar = request.getParameter("accion");               
+                if(Accionar.equals("Registrar")){
+                 String dni = request.getParameter("dni");
                 String nombre = request.getParameter("nombre");
                 String apellido = request.getParameter("apellido");
                 String telefono = request.getParameter("telefono");
@@ -151,10 +201,60 @@ public class CRUDAdministrador extends HttpServlet {
                 ps.setString(7, rol);
                 ps.setString(8, fnacimiento);
                 ps.executeUpdate();
-                request.getRequestDispatcher("CRUDAdministrador?Accion=ListarUsuario").forward(request, response);
+               request.getRequestDispatcher("CRUDAdministrador?Accion=ListarUsuario").forward(request, response);
                 } catch (Exception e) {
                     
+                } 
+                }  else if(Accionar.equals("InsertProducto")){
+                  String idproductoinsert = request.getParameter("idproducto");
+                String nombrep = request.getParameter("nombrep");
+                String descp = request.getParameter("apellido");
+                int stock = Integer.parseInt(request.getParameter("stock"));
+                float precio = Float.parseFloat(request.getParameter("precio"));
+                String genero = request.getParameter("genero");
+                String categoria = request.getParameter("categoria");
+                String imagen = request.getParameter("imagen");
+                try {
+                    ps = conexionDB.getConexion().prepareStatement("insert into productos values(?,?,?,?,?,?,?,?)");
+                    ps.setString(1, idproductoinsert);
+                    ps.setString(2, nombrep);
+                    ps.setString(3, descp);
+                    ps.setInt(4, stock);
+                    ps.setFloat(5, precio);
+                    ps.setString(6, genero);
+                    ps.setString(7, categoria);
+                    ps.setString(8, imagen);
+                    ps.executeUpdate();
+                    request.getRequestDispatcher("/CRUDAdministrador?Accion=ListarProducto").forward(request, response);
+                    
+                } catch (Exception e) {
                 }
+                 
+                } else if(Accionar.equals("EditarUsuario")){
+                     String dni = request.getParameter("dni");
+                String nombre = request.getParameter("nombre");
+                String apellido = request.getParameter("apellido");
+                String telefono = request.getParameter("telefono");
+                String pass = request.getParameter("pass");
+                String correo = request.getParameter("correo");
+                String rol = request.getParameter("rol");
+                String fnacimiento = request.getParameter("fnacimiento");
+                try {
+                    ps = conexionDB.getConexion().prepareStatement("update usuarios set dni=?,nombre=?,apellido=?,telefono=?,correo=?,contraseña=?,rol=?,nacimiento=?");
+                    ps.setString(1, dni);
+                    ps.setString(2, nombre);
+                    ps.setString(3, apellido);
+                    ps.setString(4, telefono);
+                    ps.setString(5, correo);
+                    ps.setString(6, pass);
+                    ps.setString(7, rol);
+                    ps.setString(8, fnacimiento);
+                    ps.executeUpdate();
+                    request.getRequestDispatcher("CRUDAdministrador?Accion=ListarUsuario").forward(request, response);
+                } catch (Exception e) {
+                }
+                }
+                
         
     }
 

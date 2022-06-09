@@ -102,50 +102,48 @@
                     <div
                         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                         <h1 class="h2">Dashboard</h1>
+
+
                     </div>
-                    <c:forEach var="var" items="${Buscar}">
+                    <c:forEach var="p" items="${Buscar}">
                         <form action="CRUDAdministrador" method="post" class="container">
                             <div class="modal-body">
                                 <div class="">
-                                    <label for="">DNI</label>
-                                    <input type="text" class="form-control" name="dni" value="${var.getDNI()}">
+                                    <label for="">Id Producto</label>
+                                    <input type="text" class="form-control" name="dni" value="${p.getIdProducto()}">
                                 </div>
                                 <div>
-                                    <label for="">Nombre</label>
-                                    <input type="text" class="form-control" name="nombre" value="${var.getNombre()}">
+                                    <label for="">Nombre Producto</label>
+                                    <input type="text" class="form-control" name="nombre" value="${p.getNombreP()}">
                                 </div>
                                 <div>
-                                    <label for="">Apellido</label>
-                                    <input type="text" class="form-control" name="apellido" value="${var.getApellido()}">
+                                    <label for="">Descripcion</label>
+                                    <input type="text" class="form-control" name="apellido" value="${p.getDescP()}">
                                 </div>
                                 <div>
-                                    <label for="">Telefono</label>
-                                    <input type="text" class="form-control" name="telefono" value="${var.getTelefono()}">
+                                    <label for="">Stock</label>
+                                    <input type="text" class="form-control" name="telefono" value="${p.getStock()}">
                                 </div>
                                 <div>
-                                    <label for="">Correo</label>
-                                    <input type="text" class="form-control" name="correo" value="${var.getCorreo()}">
+                                    <label for="">Precio</label>
+                                    <input type="text" class="form-control" name="correo" value="${p.getPrecio()}">
                                 </div>
                                 <div>
-                                    <label for="">contraseña</label>
-                                    <input type="text" class="form-control" name="pass" value="${var.getContraseña()}">
+                                    <label for="">Genero</label>
+                                    <input type="text" class="form-control" name="pass" value="${p.getGenero()}">
                                 </div>  
                                 <div>
-                                    <label for="">rol</label>
-                                    <select name="rol" id="" class="form-control">
-                                        <option value=" value="${var.getRol()}"> ${var.getRol()} <---</option>
-                                        <option value="admin">Admin</option>
-                                        <option value="cliente">Cliente</option>
-                                    </select>
+                                    <label for="">Categoria</label>
+                                    <input type="text" value="${p.getCategoria()}" name="categoria" class="form-control" >
                                 </div>                                    
                                 <div>
-                                    <label for="">Fecha de Nacimiento</label>
-                                    <input type="date" class="form-control" name="fnacimiento"  value="${var.getFnacimiento()}">
+                                    <label for="">Imagen</label>
+                                    <input type="text" class="form-control" name="fnacimiento"  value="${p.getImagen()}">
                                 </div>
                             </div>
                             <div class="">
-                                  <button value="EditarUsuario" name="accion" class="btn btn-primary">Editar</button>
-                                <a  href="CRUDAdministrador?Accion=ListarUsuario" class="btn btn-danger" >Regresar</a>
+                                <input type="submit" value="Editar" name="Accion" class="btn btn-primary">
+                                <a  href="CRUDAdministrador?Accion=ListarProducto" class="btn btn-danger" >Regresar</a>
                             </div>
                         </form>
                     </c:forEach>
