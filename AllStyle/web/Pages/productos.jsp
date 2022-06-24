@@ -1,3 +1,4 @@
+<%@page import="beans.Productos"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="beans.ProductoBeans"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -86,21 +87,22 @@
     </div>
 
     <div class="contenedor_productos">
-        
+        <div class="productos_fila"> 
         <%
-            ArrayList<ProductoBeans> arrayProductos = (ArrayList<ProductoBeans>)request.getAttribute("listaProductos");
+            ArrayList<Productos> arrayProductos = (ArrayList<Productos>)request.getAttribute("listaProductos");
 
             for (int i = 0; i < arrayProductos.size(); i++) {    
-                ProductoBeans producto = arrayProductos.get(i);
+                Productos producto = arrayProductos.get(i);
             %>
         
-        <div class="productos_fila">    
+           
             <div class="productos">
-                <img src="img/tshirt.png"  alt="Avatar" style="">
+                <img src="imgProductos/<%=producto.getImagen()%>"  alt="Avatar" style="width: auto;">
                 <div class="contenido_producto">
-                    <p>Producto: <%=producto.getNombre()%> </p>
+                    <p>Producto: <%=producto.getNombreP()%> </p>
                     <p>Precio: <%=producto.getPrecio()%> </p>
-                    <p>Categoria:</p> 
+                    <p>Categoria: <%=producto.getCategoria()%> </p> 
+                    <p>Genero: <%=producto.getGenero()%> </p> 
                    <div class="btn_productos">
                     <a id="añadir" href="#"> <i class="fa-solid fa-cart-shopping"></i> Añadir </a>
                    </div>

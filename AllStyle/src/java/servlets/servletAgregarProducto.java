@@ -97,18 +97,21 @@ public class servletAgregarProducto extends HttpServlet {
                 }
             }
                                 
-                PreparedStatement pstaAgregarProducto = conexionDB.getConexion().prepareStatement("insert into productos values(?,?,?,?,?,?)");     
+                PreparedStatement pstaAgregarProducto = conexionDB.getConexion().prepareStatement("insert into productos values(?,?,?,?,?,?,?,?)");     
                     pstaAgregarProducto.setString(1, array.get(0).toString());
                     pstaAgregarProducto.setString(2, array.get(1).toString());
                     pstaAgregarProducto.setString(3, array.get(2).toString());
                     pstaAgregarProducto.setInt(4, Integer.parseInt(array.get(3).toString()));
                     pstaAgregarProducto.setDouble(5, Double.parseDouble(array.get(4).toString()));
-                    pstaAgregarProducto.setString(6, imagen);
+                    pstaAgregarProducto.setString(6, array.get(5).toString());
+                    pstaAgregarProducto.setString(7, array.get(6).toString());
+                    pstaAgregarProducto.setString(8, imagen);
                 pstaAgregarProducto.executeUpdate();
 
-                conexionDB.getConexion().close();              
-
-                request.getRequestDispatcher("servletProductos").forward(request, response); 
+                conexionDB.getConexion().close();       
+                    
+                request.setAttribute("accion", "ListarProducto");                
+                request.getRequestDispatcher("CRUDAdministrador").forward(request, response);
         }catch(Exception e){
             System.out.println("Error Agregar Producto: " + e);
         }

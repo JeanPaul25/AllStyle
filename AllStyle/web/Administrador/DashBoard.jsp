@@ -1,9 +1,3 @@
-<%-- 
-    Document   : DashBoard
-    Created on : 8 jun. 2022, 18:50:15
-    Author     : sebas
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
@@ -12,8 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.84.0">
     <title>plantilla || 2.0</title>
     <link rel="stylesheet" href="css/EstiloAdministrador.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -66,19 +58,19 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link">
                                 <span data-feather="file"></span>
                                 ORDEN
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" onclick="servletNeutro('CRUDAdministrador','ListarProducto')">
                                 <span data-feather="shopping-cart"></span>
                                 PRODUCTO
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" onclick="servletNeutro('CRUDAdministrador','ListarUsuario')">
                                 <span data-feather="users"></span>
                                 USUARIOS
                             </a>
@@ -90,7 +82,7 @@
                             </a>
                         </li>
                         <li class="nav-item cerrar_sesion">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="servletLogin">
                                 <span data-feather="log-out"></span>
                                 Cerrar Sesion
                             </a>
@@ -108,21 +100,21 @@
                 </div>
                 <br>
                 <div class="row container centro_administrador">
-                    <a href="CRUDAdministrador?Accion=ListarUsuario" class="col-sm-3 caja bg-success" >
+                    <div class="text-center">
+                        <h3 class="fw-bold"> Métricas </h3>
+                    </div>
+                    <a class="col-sm-3 caja bg-success" >
                         <div class="well">
-                            <h4>DASHBOARD</h4>
                             <p>Usuarios <span class="iconify" data-icon="icon-park-outline:database-enter"></span></p>
                         </div>
                     </a>
-                    <a href="CRUDAdministrador?Accion=ListarProducto" class="col-sm-3 caja bg-success">
+                    <a class="col-sm-3 caja bg-success">
                         <div class="well">
-                             <h4>DASHBOARD</h4>
                             <p>Productos <span class="iconify" data-icon="icon-park-outline:database-enter"></span></p>
                         </div>
                     </a>
-                    <a href="CRUDAdministrador?Accion=ListarBoleta" class="col-sm-3 caja bg-success">
+                    <a  class="col-sm-3 caja bg-success">
                         <div class="well">
-                             <h4>DASHBOARD </h4>
                              <p>Boletas <span class="iconify" data-icon="icon-park-outline:database-enter"></span></p>
                         </div>
                     </a>
@@ -132,6 +124,15 @@
             </main>
         </div>
     </div>
+    
+    <script src="js/controlServlets.js"> </script> 
+            
+    <!-- Formulario para redireccionamiento -->
+    <form class="d-none" name="fServletNeutro" action="" method="Post">
+        <input type="hidden" name="accion" id="fInput" value=""> 
+        <input type="hidden" name="fId" id="fId" value=""> 
+    </form> 
+    
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
             integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"

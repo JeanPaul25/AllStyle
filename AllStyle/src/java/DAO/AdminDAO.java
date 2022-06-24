@@ -87,18 +87,18 @@ public class AdminDAO {
             ps = conexionDB.getConexion().prepareStatement("select * from productos");
             rs = ps.executeQuery();
             while (rs.next()) {
-            Productos p = new Productos();
-            p.setIdProducto(rs.getString(1));
-            p.setNombreP(rs.getString(2));
-            p.setDescP(rs.getString(3));
-            p.setStock(rs.getInt(4));
-            p.setPrecio(rs.getFloat(5));
-            p.setGenero(rs.getString(6));
-            p.setCategoria(rs.getString(7));
-            p.setImagen(rs.getString(8));
-            ListarProducto.add(p);
+                Productos p = new Productos();
+                p.setIdProducto(rs.getString(1));
+                p.setNombreP(rs.getString(2));
+                p.setDescP(rs.getString(3));
+                p.setStock(rs.getInt(4));
+                p.setPrecio(rs.getFloat(5));
+                p.setGenero(rs.getString(6));
+                p.setCategoria(rs.getString(7));
+                p.setImagen(rs.getString(8));
+                ListarProducto.add(p);
             }
-             
+                conexionDB.getConexion().close();
         } catch (Exception e) {
             
         }
@@ -123,7 +123,6 @@ public class AdminDAO {
                 p.setCategoria(rs.getString(7));
                 p.setImagen(rs.getString(8));
                 ListarProducto.add(p);
-
             }
 
         } catch (Exception e) {

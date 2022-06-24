@@ -51,9 +51,12 @@ public class CRUDAdministrador extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        /*
         PreparedStatement ps ;
         ResultSet rs;
-        String Accion = request.getParameter("Accion");
+        String Accion = null;
+        Accion = request.getParameter("Accion");
+        
         switch(Accion){
             case "ListarBoleta":
                 Bol = adao.ListarBoleta();
@@ -67,88 +70,9 @@ public class CRUDAdministrador extends HttpServlet {
                 request.setAttribute("detalles", detalles);
                 request.setAttribute("BuscarBoleta", Bol);
                  request.getRequestDispatcher("Administrador/EditarBoleta.jsp").forward(request, response);
-                break;
-            case "ListarProducto":
-                 p = adao.ListarProducto();
-                 request.setAttribute("cantidadP", p.size());
-                 request.setAttribute("ListProductos", p);
-                 request.getRequestDispatcher("Administrador/AdministracionProducto.jsp").forward(request, response);
-                break;
-            case "BuscarProducto":
-                String idp = request.getParameter("idp");
-                p = adao.BuscarP(idp);
-                request.setAttribute("Buscar", p);
-                 request.getRequestDispatcher("Administrador/EditarProducto.jsp").forward(request, response);
-                break;
-            case "EliminarProducto":
-                 String idProducto = request.getParameter("idp");
-                try {
-                    ps = conexionDB.getConexion().prepareStatement("delete  from productos where idproducto=?");
-                    ps.setString(1, idProducto);
-                    ps.executeUpdate();
-
-                } catch (Exception e) {
-                }
-                request.getRequestDispatcher("CRUDAdministrador?Accion=ListarProducto").forward(request, response);
-                break;
-            case "":
-              
-                break;
-                
-            case "ListarUsuario":
-                usuario = adao.ListarUsuario();
-                cantA = adao.CantidadAdmin();
-                cantC = adao.CantidadCliente();
-                request.setAttribute("cantidadC", cantC.size());
-                request.setAttribute("cantA", cantA.size());
-                request.setAttribute("cantidad", usuario.size());
-                request.setAttribute("ListUser", usuario);
-                request.getRequestDispatcher("Administrador/AdministracionUsuarios.jsp").forward(request, response);
-                break;
-            case "BuscarUsuario":
-                 String id = request.getParameter("dni");
-                usuario = adao.BuscarUsuario(id);
-                request.setAttribute("Buscar", usuario);
-                 request.getRequestDispatcher("Administrador/EditarUsuario.jsp").forward(request, response);
-                break;
-            case "Eliminar":
-                String DNI = request.getParameter("DNI");
-                try {
-                    ps = conexionDB.getConexion().prepareStatement("delete  from usuarios where dni=?");
-                    ps.setString(1, DNI);
-                    ps.executeUpdate();
-
-                } catch (Exception e) {
-                }
-                request.getRequestDispatcher("CRUDAdministrador?Accion=ListarUsuario").forward(request, response);
-                break;
-            case "Editar":
-                String dni = request.getParameter("dni");
-                String nombre = request.getParameter("nombre");
-                String apellido = request.getParameter("apellido");
-                String telefono = request.getParameter("telefono");
-                String pass = request.getParameter("pass");
-                String correo = request.getParameter("correo");
-                String rol = request.getParameter("rol");
-                String fnacimiento = request.getParameter("fnacimiento");
-                try {
-                    ps = conexionDB.getConexion().prepareStatement("update usuarios(dni=?,nombre=?,apellido=?,telefono=?,correo=?,contraseña=?,rol=?,nacimiento=?)");
-                    ps.setString(1, dni);
-                    ps.setString(2, nombre);
-                    ps.setString(3, apellido);
-                    ps.setString(4, telefono);
-                    ps.setString(5, correo);
-                    ps.setString(6, pass);
-                    ps.setString(7, rol);
-                    ps.setString(8, fnacimiento);
-                    ps.executeUpdate();
-                    request.getRequestDispatcher("CRUDAdministrador?Accion=ListarUsuario").forward(request, response);
-                } catch (Exception e) {
-                }
-                break;
-            default:
-                 request.getRequestDispatcher("Administrador/DashBoard.jsp").forward(request, response);
-    }
+                break;            
+        }
+        */
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -177,85 +101,107 @@ public class CRUDAdministrador extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         PreparedStatement ps;
         ResultSet rs;
-        String Accionar = request.getParameter("accion");               
-                if(Accionar.equals("Registrar")){
-                 String dni = request.getParameter("dni");
-                String nombre = request.getParameter("nombre");
-                String apellido = request.getParameter("apellido");
-                String telefono = request.getParameter("telefono");
-                String pass = request.getParameter("pass");
-                String correo = request.getParameter("correo");
-                String rol = request.getParameter("rol");
-                String fnacimiento = request.getParameter("fnacimiento");
-                try {
-                ps = conexionDB.getConexion().prepareStatement("insert into usuarios values(?,?,?,?,?,?,?,?)");
-                ps.setString(1, dni);
-                ps.setString(2, nombre);
-                ps.setString(3, apellido);
-                ps.setString(4, telefono);
-                ps.setString(5, correo);
-                ps.setString(6, pass);
-                ps.setString(7, rol);
-                ps.setString(8, fnacimiento);
-                ps.executeUpdate();
-               request.getRequestDispatcher("CRUDAdministrador?Accion=ListarUsuario").forward(request, response);
-                } catch (Exception e) {
-                    
-                } 
-                }  else if(Accionar.equals("InsertProducto")){
-                  String idproductoinsert = request.getParameter("idproducto");
-                String nombrep = request.getParameter("nombrep");
-                String descp = request.getParameter("apellido");
-                int stock = Integer.parseInt(request.getParameter("stock"));
-                float precio = Float.parseFloat(request.getParameter("precio"));
-                String genero = request.getParameter("genero");
-                String categoria = request.getParameter("categoria");
-                String imagen = request.getParameter("imagen");
-                try {
-                    ps = conexionDB.getConexion().prepareStatement("insert into productos values(?,?,?,?,?,?,?,?)");
-                    ps.setString(1, idproductoinsert);
-                    ps.setString(2, nombrep);
-                    ps.setString(3, descp);
-                    ps.setInt(4, stock);
-                    ps.setFloat(5, precio);
-                    ps.setString(6, genero);
-                    ps.setString(7, categoria);
-                    ps.setString(8, imagen);
-                    ps.executeUpdate();
-                    request.getRequestDispatcher("/CRUDAdministrador?Accion=ListarProducto").forward(request, response);
-                    
-                } catch (Exception e) {
-                }
-                 
-                } else if(Accionar.equals("EditarUsuario")){
-                     String dni = request.getParameter("dni");
-                String nombre = request.getParameter("nombre");
-                String apellido = request.getParameter("apellido");
-                String telefono = request.getParameter("telefono");
-                String pass = request.getParameter("pass");
-                String correo = request.getParameter("correo");
-                String rol = request.getParameter("rol");
-                String fnacimiento = request.getParameter("fnacimiento");
-                try {
-                    ps = conexionDB.getConexion().prepareStatement("update usuarios set dni=?,nombre=?,apellido=?,telefono=?,correo=?,contraseña=?,rol=?,nacimiento=?");
-                    ps.setString(1, dni);
-                    ps.setString(2, nombre);
-                    ps.setString(3, apellido);
-                    ps.setString(4, telefono);
-                    ps.setString(5, correo);
-                    ps.setString(6, pass);
-                    ps.setString(7, rol);
-                    ps.setString(8, fnacimiento);
-                    ps.executeUpdate();
-                    request.getRequestDispatcher("CRUDAdministrador?Accion=ListarUsuario").forward(request, response);
-                } catch (Exception e) {
-                }
-                }
-                
+        String Accionar = request.getParameter("accion");          
+        String id = request.getParameter("fId");
         
+        if(request.getAttribute("accion") != null){
+            String AccionarAt = request.getAttribute("accion").toString();
+            Accionar = AccionarAt;
+        }
+        
+        switch(Accionar){
+            case "Dashboard":
+                request.getRequestDispatcher("Administrador/DashBoard.jsp").forward(request, response);
+                break;
+            //PRODUCTOS   
+            case "ListarProducto":
+                p = adao.ListarProducto();
+                request.setAttribute("cantidadP", p.size());
+                request.setAttribute("ListProductos", p);
+                request.getRequestDispatcher("Administrador/AdministracionProducto.jsp").forward(request, response);
+                break;
+            case "BuscarProducto": 
+                p = adao.BuscarP(id);
+                request.setAttribute("Buscar", p);
+                request.getRequestDispatcher("Administrador/EditarProducto.jsp").forward(request, response);
+                break;
+            case "EliminarProducto":
+                try {
+                    ps = conexionDB.getConexion().prepareStatement("delete  from productos where idproducto=?");
+                    ps.setString(1, id);
+                    ps.executeUpdate();
+                } catch (Exception e) {
+                    System.out.println("Error Eliminar Producto: " + e);
+                }
+                request.setAttribute("accion", "ListarProducto");
+            request.getRequestDispatcher("CRUDAdministrador").forward(request, response);
+            break;
+            //USUARIOS
+            case "ListarUsuario":
+                usuario = adao.ListarUsuario();
+                cantA = adao.CantidadAdmin();
+                cantC = adao.CantidadCliente();
+                request.setAttribute("cantidadC", cantC.size());
+                request.setAttribute("cantA", cantA.size());
+                request.setAttribute("cantidad", usuario.size());
+                request.setAttribute("ListUser", usuario);
+                request.getRequestDispatcher("Administrador/AdministracionUsuarios.jsp").forward(request, response);
+                break;
+            case "RegistrarUsuario":
+                try {  
+                    ps = conexionDB.getConexion().prepareStatement("insert into usuarios values(?,?,?,?,?,?,?,?)");
+                        ps.setString(1, request.getParameter("dni"));
+                        ps.setString(2, request.getParameter("nombre"));
+                        ps.setString(3, request.getParameter("apellido"));
+                        ps.setString(4, request.getParameter("telefono"));
+                        ps.setString(5, request.getParameter("correo"));
+                        ps.setString(6, request.getParameter("pass"));
+                        ps.setString(7, request.getParameter("rol"));
+                        ps.setString(8, request.getParameter("fnacimiento"));
+                    ps.executeUpdate();
+                    request.setAttribute("accion", "ListarUsuario");
+                    request.getRequestDispatcher("CRUDAdministrador").forward(request, response);
+                } catch (Exception e) {
+                    System.out.println("Error Registrar Usuario: " + e);
+                }
+                break;
+            case "BuscarUsuario":
+                usuario = adao.BuscarUsuario(id);
+                request.setAttribute("Buscar", usuario);
+                request.getRequestDispatcher("Administrador/EditarUsuario.jsp").forward(request, response);
+                break;
+            case "EditarUsuario":
+                try {
+                    ps = conexionDB.getConexion().prepareStatement("update usuarios set nombres=?,apellidos=?,telefono=?,correo=?,contraseña=?,rol=?,fNacimiento=? where dni = ?");
+                    ps.setString(1, request.getParameter("nombre"));
+                    ps.setString(2, request.getParameter("apellido"));
+                    ps.setString(3, request.getParameter("telefono"));
+                    ps.setString(4, request.getParameter("correo"));
+                    ps.setString(5, request.getParameter("pass"));
+                    ps.setString(6, request.getParameter("rol"));
+                    ps.setString(7, request.getParameter("fnacimiento"));
+                    ps.setString(8, request.getParameter("dni"));
+                    ps.executeUpdate();
+                    request.setAttribute("accion", "ListarUsuario");
+                    request.getRequestDispatcher("CRUDAdministrador").forward(request, response);
+                } catch (Exception e) {
+                    System.out.println("Error Editar Usuario: " + e);
+                }
+                break;
+            case "EliminarUsuario":
+                try {
+                    ps = conexionDB.getConexion().prepareStatement("delete  from usuarios where dni=?");
+                    ps.setString(1, id);
+                    ps.executeUpdate();
+                    request.setAttribute("accion", "ListarUsuario");                        
+                    request.getRequestDispatcher("CRUDAdministrador").forward(request, response);
+                } catch (Exception e) {
+                    System.out.println("Error Eliminar Usuario: " + e);
+                }
+            break;
+        }       
     }
 
     /**

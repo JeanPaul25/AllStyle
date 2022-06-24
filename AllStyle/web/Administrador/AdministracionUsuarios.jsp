@@ -1,9 +1,3 @@
-<%-- 
-    Document   : AdministracionUsuarios
-    Created on : 8 jun. 2022, 19:32:09
-    Author     : sebas
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,8 +8,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.84.0">
     <title>plantilla || 2.0</title>
     <link rel="stylesheet" href="css/administrador.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -65,7 +57,7 @@
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column color_li">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="CRUDAdministrador?Accion=Dashboard">
+                            <a class="nav-link active" aria-current="page" onclick="servletNeutro('CRUDAdministrador','Dashboard')">
                                 <span data-feather="home"></span>
                                 Dashboard
                             </a>
@@ -77,7 +69,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" onclick="servletNeutro('CRUDAdministrador','ListarProducto')">
                                 <span data-feather="shopping-cart"></span>
                                 PRODUCTO
                             </a>
@@ -95,7 +87,7 @@
                             </a>
                         </li>
                         <li class="nav-item cerrar_sesion">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="servletLogin">
                                 <span data-feather="log-out"></span>
                                 Cerrar Sesion
                             </a>
@@ -164,8 +156,8 @@
                                 <td>${list.getRol()}</td>
                                 <td>${list.getFnacimiento()}</td>
                                 <td>
-                                    <a href="CRUDAdministrador?Accion=BuscarUsuario&dni=${list.getDNI()}" class="btn btn-dark"  data-bs-toggle="" data-bs-target="" >Editar</a>
-                                    <a id="" href="CRUDAdministrador?Accion=Eliminar&DNI=${list.getDNI()}" class="btn btn-danger"><span data-feather="trash-2"></span>Eliminar</a>
+                                    <a onclick="servletNeutroId('CRUDAdministrador','BuscarUsuario','${list.getDNI()}')" class="btn btn-dark"  data-bs-toggle="" data-bs-target="" >Editar</a>
+                                    <a onclick="servletNeutroId('CRUDAdministrador','EliminarUsuario','${list.getDNI()}')" class="btn btn-danger"><span data-feather="trash-2"></span>Eliminar</a>
                                 </td>
                             </tr>
                             </c:forEach>
@@ -184,45 +176,46 @@
                                 </div>
                                 <form action="CRUDAdministrador" method="post">
                                     <div class="modal-body">
-                                        <div class="">
-                                            <label for="">DNI</label>
+                                        <input type="hidden" name="accion" value="RegistrarUsuario">
+                                        <div>
+                                            <label for="fDni">DNI</label>
                                             <input type="text" class="form-control" name="dni">
                                         </div>
                                         <div>
-                                            <label for="">Nombre</label>
+                                            <label>Nombre</label>
                                             <input type="text" class="form-control" name="nombre">
                                         </div>
                                         <div>
-                                            <label for="">Apellido</label>
+                                            <label>Apellido</label>
                                             <input type="text" class="form-control" name="apellido">
                                         </div>
                                         <div>
-                                            <label for="">Telefono</label>
+                                            <label>Telefono</label>
                                             <input type="text" class="form-control" name="telefono">
                                         </div>
                                          <div>
-                                            <label for="">Correo</label>
+                                            <label>Correo</label>
                                             <input type="text" class="form-control" name="correo">
                                         </div>
                                         <div>
-                                            <label for="">contraseña</label>
+                                            <label>contraseña</label>
                                             <input type="text" class="form-control" name="pass">
                                         </div>  
                                         <div>
-                                            <label for="">rol</label>
-                                            <select name="rol" id="" class="form-control">
-                                                <option value="admin">Admin</option>
-                                                <option value="cliente">Cliente</option>
+                                            <label>rol</label>
+                                            <select name="rol" class="form-control">
+                                                <option value="Admin">Admin</option>
+                                                <option value="Cliente">Cliente</option>
                                             </select>
                                         </div>                                    
                                         <div>
-                                            <label for="">Fecha de Nacimiento</label>
+                                            <label>Fecha de Nacimiento</label>
                                             <input type="date" class="form-control" name="fnacimiento">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button value="Registrar" name="accion" class="btn btn-primary">Registrar</button>
-                                        <a type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</a>
+                                        <button value="Registrar" name="accion" class="btn btn-primary"> Registrar </button>
+                                        <a class="btn btn-danger" data-bs-dismiss="modal">Cerrar</a>
                                     </div>
                                 </form>
                             </div>
@@ -291,6 +284,15 @@
             </main>
         </div>
     </div>
+                        
+    <script src="js/controlServlets.js"> </script> 
+            
+    <!-- Formulario para redireccionamiento -->
+    <form class="d-none" name="fServletNeutro" action="" method="Post">
+        <input type="hidden" name="accion" id="fInput" value=""> 
+        <input type="hidden" name="fId" id="fId" value=""> 
+    </form> 
+                        
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
         integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"

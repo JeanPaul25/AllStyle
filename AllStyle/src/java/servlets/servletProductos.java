@@ -1,6 +1,7 @@
 package servlets;
 
 import beans.ProductoBeans;
+import beans.Productos;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,13 +40,13 @@ public class servletProductos extends HttpServlet {
             PreparedStatement pstaProductos = conexionDB.getConexion().prepareStatement("select * from productos");     
             ResultSet rsProductos = pstaProductos.executeQuery(); 
             
-            ArrayList<ProductoBeans> arrayProductos = new ArrayList<>();
+            ArrayList<Productos> arrayProductos = new ArrayList<>();
             
             while(rsProductos.next()){
                 
-                ProductoBeans producto = new ProductoBeans(rsProductos.getString(1),
+                Productos producto = new Productos(rsProductos.getString(1),
                     rsProductos.getString(2), rsProductos.getString(3), rsProductos.getInt(4),
-                    rsProductos.getDouble(5), rsProductos.getString(6));
+                    rsProductos.getFloat(5), rsProductos.getString(6), rsProductos.getString(7), rsProductos.getString(8));
                 
                 arrayProductos.add(producto);
             }            
