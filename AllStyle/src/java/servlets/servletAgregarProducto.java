@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import beans.ProductoBeans;
@@ -24,10 +19,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import utils.conexionDB;
 
-/**
- *
- * @author Benito
- */
 @WebServlet(name = "servletAgregarProducto", urlPatterns = {"/servletAgregarProducto"})
 public class servletAgregarProducto extends HttpServlet {
 
@@ -96,7 +87,6 @@ public class servletAgregarProducto extends HttpServlet {
                     item.write(archivo_server);
                 }
             }
-                                
                 PreparedStatement pstaAgregarProducto = conexionDB.getConexion().prepareStatement("insert into productos values(?,?,?,?,?,?,?,?)");     
                     pstaAgregarProducto.setString(1, array.get(0).toString());
                     pstaAgregarProducto.setString(2, array.get(1).toString());

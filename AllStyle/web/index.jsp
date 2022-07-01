@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 02/06/2022, 12:58:36 AM
-    Author     : sebas
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true"%>
 <!DOCTYPE html>
@@ -27,18 +21,19 @@
         
     <%
         String usuario = (String)session.getAttribute("usuario");
+        
     %>
     
     <header class="header">
         <div class="header_1">
             <div class="titulo_header">
-                <a href="#">
+                <a href="index.jsp">
                     <h1>All Style</h1>
                 </a>
             </div>
             <div class="header_1_ul">
                 <ul class="header_1_li">
-                    <li><a href="servletProductos">Productos</a></li>
+                    <li><a onclick="servletNeutro('servletProductos','')"> Productos </a></li>
                     <li><a href="#">Contacto</a></li>
                     <li><a href="#">Nosotros</a></li>
                 </ul>
@@ -64,7 +59,7 @@
         
         <div class="header_2">
             <div class="header_2_a_1" style="margin-top: 13px;">
-                <a id="Login" style="cursor: pointer;" href="servletLogin?method=GET"><i class="fa-regular fa-user"></i> <span> <%=usuario%> </span></a>
+                <a id="Login" style="cursor: pointer;" href="servletLogin"><i class="fa-regular fa-user"></i> <span> <%=usuario%> </span></a>
             </div>
             <div class="header_2_a_2">
                 <a href="#" onclick="AbrirNav()"> <img src="img/bars.png" alt=""> </a>
@@ -119,11 +114,11 @@
                 <a id="CerrarVentana" class="cerrar_login"><img src="img/close.png" alt=""></a>
                 <h1 class="titulo_login">All Style</h1>
                 <div class="label input">
-                    <label for="">Email</label>
+                    <label>Email</label>
                     <input type="text" name="fEmail">
                 </div>
                 <div class="label input">
-                    <label for="">Contraseña</label>
+                    <label>Contraseña</label>
                     <input type="password" name="fPassword">
                 </div>
                 <div class="btn_login">
@@ -143,37 +138,37 @@
             <input type="hidden" name="fRol" value="Cliente">
             <div class="division_register">
                 <div class="label input_register">
-                    <label for="">DNI</label>
+                    <label>DNI</label>
                     <input type="text" name="fDni">
                 </div>
                 <div class="label input_register">
-                    <label for="">NOMBRES</label>
+                    <label>NOMBRES</label>
                     <input type="text" name="fNombres">
                 </div>
             </div>
             <div class="division_register">
                 <div class="label input_register">
-                    <label for="">APELLIDOS</label>
+                    <label>APELLIDOS</label>
                     <input type="text" name="fApellidos">
                 </div>
                 <div class="label input_register">
-                    <label for="">TELEFONO</label>
+                    <label>TELEFONO</label>
                     <input type="text" name="fTelefono">
                 </div>
             </div>
             <div class="division_register">
                 <div class="label input_register">
-                    <label for="">CORREO</label>
+                    <label>CORREO</label>
                     <input type="text" name="fEmail">
                 </div>
                 <div class="label input_register">
-                    <label for="">CONTRASEÑA</label>
+                    <label>CONTRASEÑA</label>
                     <input type="password" name="fPassword">
                 </div>
             </div>
             <div class="division_register">
                 <div class="label input_date">
-                    <label for="">FECHA NACIMIENTO</label>
+                    <label>FECHA NACIMIENTO</label>
                     <input type="date">
                 </div>
                 
@@ -185,6 +180,14 @@
         </form>
     </div>
    
+    <script src="js/controlServlets.js"> </script> 
+            
+    <!-- Formulario para redireccionamiento -->
+    <form class="d-none" name="fServletNeutro" action="" method="Post">
+        <input type="hidden" name="accion" id="fInput" value=""> 
+        <input type="hidden" name="fId" id="fId" value=""> 
+    </form> 
+    
 <script src="js/modal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>

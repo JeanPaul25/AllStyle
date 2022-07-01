@@ -35,30 +35,7 @@ public class servletProductos extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8"); 
-        try{            
-            PreparedStatement pstaProductos = conexionDB.getConexion().prepareStatement("select * from productos");     
-            ResultSet rsProductos = pstaProductos.executeQuery(); 
-            
-            ArrayList<Productos> arrayProductos = new ArrayList<>();
-            
-            while(rsProductos.next()){
-                
-                Productos producto = new Productos(rsProductos.getString(1),
-                    rsProductos.getString(2), rsProductos.getString(3), rsProductos.getInt(4),
-                    rsProductos.getFloat(5), rsProductos.getString(6), rsProductos.getString(7), rsProductos.getString(8));
-                
-                arrayProductos.add(producto);
-            }            
-            
-            conexionDB.getConexion().close();
-            
-            request.setAttribute("listaProductos", arrayProductos);
-                    
-            request.getRequestDispatcher("Pages/productos.jsp").forward(request, response);                            
-        } catch (IOException | SQLException | ServletException e) {
-            System.out.println("Error Productos: " + e);
-        }  
+        response.setContentType("text/html;charset=UTF-8");           
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -88,7 +65,30 @@ public class servletProductos extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);        
+        processRequest(request, response);  
+        try{            
+            PreparedStatement pstaProductos = conexionDB.getConexion().prepareStatement("select * from productos");     
+            ResultSet rsProductos = pstaProductos.executeQuery(); 
+            
+            ArrayList<Productos> arrayProductos = new ArrayList<>();
+            
+            while(rsProductos.next()){
+                
+                Productos producto = new Productos(rsProductos.getString(1),
+                    rsProductos.getString(2), rsProductos.getString(3), rsProductos.getInt(4),
+                    rsProductos.getFloat(5), rsProductos.getString(6), rsProductos.getString(7), rsProductos.getString(8));
+                
+                arrayProductos.add(producto);
+            }            
+            
+            conexionDB.getConexion().close();
+            
+            request.setAttribute("listaProductos", arrayProductos);
+                    
+            request.getRequestDispatcher("Pages/productos.jsp").forward(request, response);                            
+        } catch (IOException | SQLException | ServletException e) {
+            System.out.println("Error Productos: " + e);
+        }
     }
 
     /**

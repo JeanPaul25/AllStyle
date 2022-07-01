@@ -6,14 +6,18 @@ public class ProductoBeans {
     String descripcion;
     int stock;
     double precio;
+    String genero;
+    String categoria;
     String imagen;
 
-    public ProductoBeans(String idProducto, String nombre, String descripcion, int stock, double precio, String imagen) {
+    public ProductoBeans(String idProducto, String nombre, String descripcion, int stock, double precio, String genero, String categoria, String imagen) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.stock = stock;
         this.precio = precio;
+        this.genero = genero;
+        this.categoria = categoria;
         this.imagen = imagen;
     }
 
@@ -57,6 +61,22 @@ public class ProductoBeans {
         this.precio = precio;
     }
 
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
     public String getImagen() {
         return imagen;
     }
@@ -64,6 +84,6 @@ public class ProductoBeans {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-    
+
     
 }
