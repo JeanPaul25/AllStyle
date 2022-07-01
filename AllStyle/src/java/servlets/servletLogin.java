@@ -78,24 +78,22 @@ public class servletLogin extends HttpServlet {
             pstaLogin.setString(2, password);
             ResultSet rsLogin = pstaLogin.executeQuery(); 
             
-            while(rsLogin.next()){
-                if(rsLogin.getString(2) != null){                    
-                    String[] nombres = rsLogin.getString(2).split(" ");
-                    String[] apellidos = rsLogin.getString(3).split(" ");
-                    usuario = nombres[0] + " " + apellidos[0];
-                    conexionDB.getConexion().close();
-                }else{
-                    System.out.println("No hay usuario");
-                }
+            while(rsLogin.next()){                  
+                String[] nombres = rsLogin.getString(2).split(" ");
+                String[] apellidos = rsLogin.getString(3).split(" ");
+                usuario = nombres[0] + " " + apellidos[0];
+                conexionDB.getConexion().close();               
                 
                 session.setAttribute("usuario", usuario);
+                session.setAttribute("dni", rsLogin.getInt(1));
                 
                 if(rsLogin.getString(7).equals("Cliente")){
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 }else{
                     request.getRequestDispatcher("Administrador/DashBoard.jsp").forward(request, response);
                 }                
-            }            
+            }
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         } catch (IOException | SQLException | ServletException e) {
             System.out.println("Error Login: " + e);
         }        

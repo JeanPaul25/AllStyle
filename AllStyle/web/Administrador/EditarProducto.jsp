@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -101,42 +101,50 @@
                     <c:forEach var="p" items="${Buscar}">
                         <form action="CRUDAdministrador" method="post" class="container">
                             <div class="modal-body">
+                                <input type="hidden" name="accion" value="EditarProducto">
                                 <div class="">
-                                    <label for="">Id Producto</label>
-                                    <input type="text" class="form-control" name="dni" value="${p.getIdProducto()}">
+                                    <label>Id Producto</label>
+                                    <input type="text" class="form-control" name="fId" value="${p.getIdProducto()}" readonly>
                                 </div>
                                 <div>
-                                    <label for="">Nombre Producto</label>
-                                    <input type="text" class="form-control" name="nombre" value="${p.getNombreP()}">
+                                    <label>Nombre Producto</label>
+                                    <input type="text" class="form-control" name="fNombre" value="${p.getNombreP()}">
                                 </div>
                                 <div>
-                                    <label for="">Descripcion</label>
-                                    <input type="text" class="form-control" name="apellido" value="${p.getDescP()}">
+                                    <label>Descripcion</label>
+                                    <input type="text" class="form-control" name="fDescripcion" value="${p.getDescP()}">
                                 </div>
                                 <div>
-                                    <label for="">Stock</label>
-                                    <input type="text" class="form-control" name="telefono" value="${p.getStock()}">
+                                    <label>Stock</label>
+                                    <input type="text" class="form-control" name="fStock" value="${p.getStock()}">
                                 </div>
                                 <div>
-                                    <label for="">Precio</label>
-                                    <input type="text" class="form-control" name="correo" value="${p.getPrecio()}">
+                                    <label>Precio</label>
+                                    <input type="text" class="form-control" name="fPrecio" value="${p.getPrecio()}">
                                 </div>
                                 <div>
-                                    <label for="">Genero</label>
-                                    <input type="text" class="form-control" name="pass" value="${p.getGenero()}">
+                                    <label>Genero</label>
+                                    <input type="text" class="form-control" name="fGenero" value="${p.getGenero()}" readonly>
                                 </div>  
                                 <div>
-                                    <label for="">Categoria</label>
-                                    <input type="text" value="${p.getCategoria()}" name="categoria" class="form-control" >
+                                    <label>Categoria</label>
+                                    <input type="text" value="${p.getCategoria()}" name="fCategoria" class="form-control" readonly>                                                                        
                                 </div>                                    
                                 <div>
-                                    <label for="">Imagen</label>
-                                    <input type="text" class="form-control" name="fnacimiento"  value="${p.getImagen()}">
+                                    <div class="row">                                        
+                                        <div class="col-2"> 
+                                            <label>Imagen</label>
+                                            <input type="text" class="form-control" name="fImagen" value="${p.getImagen()}" readonly>
+                                        </div>
+                                        <div class="col"> 
+                                            <img src="imgProductos/${p.getImagen()}" alt="Producto: ${p.getIdProducto()}" style="height: 100px">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="">
-                                <input type="submit" value="Editar" name="Accion" class="btn btn-primary">
-                                <a  href="CRUDAdministrador?Accion=ListarProducto" class="btn btn-danger" >Regresar</a>
+                            <div>
+                                <input type="submit" value="Editar" class="btn btn-primary">
+                                <a onclick="servletNeutro('CRUDAdministrador','ListarProducto')" class="btn btn-danger" >Regresar</a>
                             </div>
                         </form>
                     </c:forEach>
@@ -148,6 +156,14 @@
             </div>
         </div>
 
+        <script src="js/controlServlets.js"> </script> 
+            
+        <!-- Formulario para redireccionamiento -->
+        <form class="d-none" name="fServletNeutro" action="" method="Post">
+            <input type="hidden" name="accion" id="fInput" value=""> 
+            <input type="hidden" name="fId" id="fId" value=""> 
+        </form>             
+            
 
         <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"

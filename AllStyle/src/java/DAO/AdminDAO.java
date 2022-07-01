@@ -15,6 +15,7 @@ import java.util.List;
 public class AdminDAO {
     ResultSet rs;
     PreparedStatement ps;
+        
      public List ListarBoleta(){
          ArrayList<Boletas> ListaBoletas = new ArrayList<>();
         

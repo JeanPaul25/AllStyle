@@ -51,28 +51,6 @@ public class CRUDAdministrador extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*
-        PreparedStatement ps ;
-        ResultSet rs;
-        String Accion = null;
-        Accion = request.getParameter("Accion");
-        
-        switch(Accion){
-            case "ListarBoleta":
-                Bol = adao.ListarBoleta();
-                 request.setAttribute("ListarBoletas", Bol);
-                  request.getRequestDispatcher("Administrador/AdministracionBoletas.jsp").forward(request, response);
-                break;
-            case "BuscarBoleta":
-                String IDboleta = request.getParameter("IDboleta");
-                Bol = adao.BuscarBoleta(IDboleta);
-                detalles = adao.DetallesBol(IDboleta);
-                request.setAttribute("detalles", detalles);
-                request.setAttribute("BuscarBoleta", Bol);
-                 request.getRequestDispatcher("Administrador/EditarBoleta.jsp").forward(request, response);
-                break;            
-        }
-        */
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -126,6 +104,24 @@ public class CRUDAdministrador extends HttpServlet {
                 p = adao.BuscarP(id);
                 request.setAttribute("Buscar", p);
                 request.getRequestDispatcher("Administrador/EditarProducto.jsp").forward(request, response);
+                break;
+            case "EditarProducto":
+                try {
+                PreparedStatement pstaEditarProducto = conexionDB.getConexion().prepareStatement("update productos set nombre=?, descripcion=?, stock=?, precio=?, genero=?, categoria=?, imagen=? where idProducto=?");  
+                    pstaEditarProducto.setString(1, request.getParameter("fNombre"));
+                    pstaEditarProducto.setString(2, request.getParameter("fDescripcion"));
+                    pstaEditarProducto.setInt(3, Integer.parseInt(request.getParameter("fStock")));
+                    pstaEditarProducto.setDouble(4, Double.parseDouble(request.getParameter("fPrecio")));
+                    pstaEditarProducto.setString(5, request.getParameter("fGenero"));
+                    pstaEditarProducto.setString(6, request.getParameter("fCategoria"));
+                    pstaEditarProducto.setString(7, request.getParameter("fImagen"));
+                    pstaEditarProducto.setString(8, request.getParameter("fId"));
+                pstaEditarProducto.executeUpdate();
+                    request.setAttribute("accion", "ListarProducto");
+                request.getRequestDispatcher("CRUDAdministrador").forward(request, response);
+                } catch (Exception e) {
+                    System.out.println("Error Editar Producto: " +e);
+                }
                 break;
             case "EliminarProducto":
                 try {

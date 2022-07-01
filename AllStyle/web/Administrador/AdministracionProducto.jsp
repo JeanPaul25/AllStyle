@@ -2,7 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
@@ -147,8 +147,8 @@
                                 <td>${p.getCategoria()}</td>
                                 <td> <img src="imgProductos/${p.getImagen()}" alt="Producto ${p.getIdProducto()}" style="height: 50px"/> </td>
                                 <td>
-                                    <a onclick="servletNeutroId('CRUDAdministrador','BuscarProducto','${p.getIdProducto()}')"  class="btn btn-dark"  data-bs-toggle="" data-bs-target="" >Editar</a>
-                                    <a onclick="servletNeutroId('CRUDAdministrador','EliminarProducto','${p.getIdProducto()}')" class="btn btn-danger"><span data-feather="trash-2"></span>Eliminar</a>
+                                    <a onclick="servletNeutroId('CRUDAdministrador','BuscarProducto','${p.getIdProducto()}')" class="btn btn-dark" data-bs-toggle="" data-bs-target=""> Editar </a>
+                                    <a onclick="servletNeutroId('CRUDAdministrador','EliminarProducto','${p.getIdProducto()}')" class="btn btn-danger"><span data-feather="trash-2"></span> Eliminar </a>
                                 </td>
                             </tr>
                             </c:forEach>
@@ -189,7 +189,7 @@
                                         </div>
                                         <div>
                                             <label>Genero</label>                                         
-                                            <select name="fGenero" class="form-control" >
+                                            <select name="fGenero" class="form-control">
                                                 <option value="O">Sin Especificar</option>
                                                 <option value="F">Femenino</option>
                                                 <option value="M">Masculino</option>
@@ -197,15 +197,14 @@
                                         </div>  
                                         <div>
                                             <label>Categoria</label>                                            
-                                             <select name="fCategoria" class="form-control" >
+                                            <select name="fCategoria" class="form-control" >
                                                 <option value="Accesorios">Accesorios</option>
                                                 <option value="Poleras">Poleras</option>
                                                 <option value="Polo">Polo</option>
                                                 <option value="Buzo">Buzo</option>
                                                 <option value="Short">Short</option>
                                                 <option value="Media">Media</option>
-                                                <option value="Zapatilla">Zapatilla</option>
-                                                
+                                                <option value="Zapatilla">Zapatilla</option>                                                
                                             </select>
                                         </div>                                    
                                         <div>
@@ -232,47 +231,47 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <c:forEach var="var" items="${Buscar}">
-                                    <form action="CRUDAdministrador" method="">
+                                    <form action="CRUDAdministrador" method="post">
                                     <div class="modal-body">
                                         <div class="">
-                                            <label for="">${var.getDNI()}</label>
+                                            <label>${var.getDNI()}</label>
                                             <input type="text" class="form-control" value="">
                                         </div>
                                         <div>
-                                            <label for="">Nombre</label>
+                                            <label>Nombre</label>
                                             <input type="text" class="form-control" name="nombre">
                                         </div>
                                         <div>
-                                            <label for="">Apellido</label>
+                                            <label>Apellido</label>
                                             <input type="text" class="form-control" name="apellido">
                                         </div>
                                         <div>
-                                            <label for="">Telefono</label>
+                                            <label>Telefono</label>
                                             <input type="text" class="form-control" name="telefono">
                                         </div>
                                          <div>
-                                            <label for="">Correo</label>
+                                            <label>Correo</label>
                                             <input type="text" class="form-control" name="correo">
                                         </div>
                                         <div>
-                                            <label for="">contraseña</label>
+                                            <label>contraseña</label>
                                             <input type="text" class="form-control" name="pass">
                                         </div>  
                                         <div>
-                                            <label for="">rol</label>
+                                            <label> rol </label>
                                             <select name="rol" class="form-control">
                                                 <option value="admin">Admin</option>
                                                 <option value="cliente">Cliente</option>
                                             </select>
                                         </div>                                    
                                         <div>
-                                            <label for="">Fecha de Nacimiento</label>
+                                            <label>Fecha de Nacimiento</label>
                                             <input type="date" class="form-control" name="fnacimiento">
                                         </div>
                                     </div>
                                     <div class="modal-footer">                                        
                                         <button value="InsertProducto" name="accion" class="btn btn-primary">Registrar</button>
-                                        <a type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</a>
+                                        <a class="btn btn-danger" data-bs-dismiss="modal">Cerrar</a>
                                     </div>
                                 </form>
                                 </c:forEach>
