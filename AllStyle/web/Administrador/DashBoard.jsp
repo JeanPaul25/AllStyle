@@ -121,6 +121,43 @@
                 </div>
                 
                 
+                <div class="row container centro_administrador">
+                    <div class="text-center">
+                        <h3 class="fw-bold"> DASHBOARD </h3>
+                    </div>
+                    <a class="col-sm-3 caja bg-primary " >
+                        <div class="well">
+                            <p>Usuarios Clientes <span class="iconify"></span></p>
+                            <p><span style="font-size: 20px">( ${admin} )</span>  Usuarios Clientes</p>
+                        </div>
+                    </a>
+                     <a class="col-sm-3 caja bg-primary " >
+                        <div class="well">
+                            <p>Usuarios Administradores <span class="iconify"></span></p>
+                             <p><span style="font-size: 20px">( ${usuario} )</span>  Administradores</p>
+                        </div>
+                    </a>
+                   <a class="col-sm-3 caja bg-primary " >
+                        <div class="well">
+                            <p>Total de Usuarios <span class="iconify"></span></p>
+                             <p><span style="font-size: 20px">( ${TotalUsuario} )</span>  Total de Usuarios</p>
+                        </div>
+                    </a>
+                    <a class="col-sm-3 caja bg-primary">
+                        <div class="well">
+                            <p>Productos <span class="iconify" data-icon=""></span></p>
+                             <p><span style="font-size: 20px">( ${TotalProductos} )</span>  Productos</p>
+                        </div>
+                    </a>
+                    <a  class="col-sm-3 caja bg-primary">
+                        <div class="well">
+                             <p>Boletas <span class="iconify" data-icon=""></span></p>
+                             <p><span style="font-size: 20px">( ${TotalBoletas} ) </span> boletas Registradas</p>
+                        </div>
+                    </a>
+                </div>
+                    
+                
             </main>
         </div>
     </div>

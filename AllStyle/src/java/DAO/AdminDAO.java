@@ -15,6 +15,82 @@ import java.util.List;
 public class AdminDAO {
     ResultSet rs;
     PreparedStatement ps;
+    public int TotalBoletas(){
+        int TotalBoletas=0;
+        try {
+            ps =conexionDB.getConexion().prepareStatement("select count(idboleta) from boletas");
+            rs= ps.executeQuery();
+            while (rs.next()) {                
+                if(rs.getString(1) != null){
+                    TotalBoletas = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+        }
+        return TotalBoletas;
+    }
+     public int TotalProductos(){
+        int Cantidad=0;        
+        try {
+           ps = conexionDB.getConexion().prepareStatement("select count(idproducto) from productos");
+           rs = ps.executeQuery();
+            while (rs.next()) {
+                if (rs.getString(1) != null) {
+                    Cantidad = rs.getInt(1);
+                }
+                
+            }
+            
+        } catch (Exception e) {
+        }
+        return Cantidad;
+    }
+     public int TotalUsuario(){
+        int Cantidad = 0;
+        try {
+             ps = conexionDB.getConexion().prepareStatement("select count(dni) from usuarios ");
+             rs = ps.executeQuery();
+                while (rs.next()) {
+                    if(rs.getString(1) != null){
+                    Cantidad = rs.getInt(1);                                       
+                    }
+                }
+                 
+            } catch (Exception e) {
+            }
+           return Cantidad;
+    }
+    public int CantidadusuarioCliente(){
+        int Cantidad = 0;
+        try {
+             ps = conexionDB.getConexion().prepareStatement("select count(dni) from usuarios where rol='cliente'");
+             rs = ps.executeQuery();
+                while (rs.next()) {
+                    if(rs.getString(1) != null){
+                    Cantidad = rs.getInt(1);                                       
+                    }
+                }
+                 
+            } catch (Exception e) {
+            }
+           return Cantidad;
+    }
+    public int CantUsuarioAdmin(){
+        int Cantidad = 0;
+        try {
+             ps = conexionDB.getConexion().prepareStatement("select count(dni) from usuarios where rol='admin'");
+             rs = ps.executeQuery();
+                while (rs.next()) {
+                    if(rs.getString(1) != null){
+                    Cantidad = rs.getInt(1);                                       
+                    }
+                }
+                 
+            } catch (Exception e) {
+            }
+           return Cantidad;
+    }
+    
      public List ListarBoleta(){
          ArrayList<Boletas> ListaBoletas = new ArrayList<>();
         

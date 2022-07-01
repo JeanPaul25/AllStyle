@@ -115,7 +115,7 @@
 
     <!-- Login -->
      <div class="contenedor_modal" id="ventana_login" >    
-            <form action="servletLogin" class="form" method="POST">
+            <form action="servletLogin" class="form" method="post">
                 <a id="CerrarVentana" class="cerrar_login"><img src="img/close.png" alt=""></a>
                 <h1 class="titulo_login">All Style</h1>
                 <div class="label input">
@@ -127,7 +127,7 @@
                     <input type="password" name="fPassword">
                 </div>
                 <div class="btn_login">
-                    <button type="submit">Iniciar Sesion</button>
+                    <button>Iniciar Sesion</button>
                     <a id="registrarVentana">Registrar</a>
                 </div>
                 <p class="msg">Tu Contraseña Es privada !No lo Compartas¡</p>
@@ -137,7 +137,7 @@
     <!-- Register -->
     <div class="contenedor_modal_registrar" id="ventana_registrar">
         
-        <form action="servletRegister" class="form_register" method="POST">
+        <form action="servletRegister" class="form_register" method="post">
               <a id="cerrarregister" class="cerrar_login"><img src="img/close.png" alt=""></a>
             <h1>Registrate En All Style</h1>
             <input type="hidden" name="fRol" value="Cliente">
