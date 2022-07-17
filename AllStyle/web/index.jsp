@@ -38,12 +38,12 @@
                     <li><a href="#">Nosotros</a></li>
                 </ul>
             </div>
-        </div>
 
         <%
             if(usuario == null){
             %>
         
+        </div>
         <div class="header_2">
             <div class="header_2_a_1">
                 <a id="Login" style="cursor: pointer;"><i class="fa-regular fa-user"></i> <span> Iniciar Sesion </span></a>
@@ -56,7 +56,12 @@
         <%
             }else{
             %>
-        
+                        
+            <ul class="header_1_li">
+                <li><a onclick="servletNeutro('servletOrdenes','')"> Ordenes </a></li>
+            </ul>
+        </div>
+            
         <div class="header_2">
             <div class="header_2_a_1" style="margin-top: 13px;">
                 <a id="Login" style="cursor: pointer;" href="servletLogin"><i class="fa-regular fa-user"></i> <span> <%=usuario%> </span></a>

@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package beans;
 
-/**
- *
- * @author sebas
- */
 public class DetallesBoleta {
     String IDBoleta;
     String IDProducto;
@@ -16,6 +7,11 @@ public class DetallesBoleta {
     double Descuento;
     double Importe;
 
+    
+    String nombreProducto;
+    String imagen;
+    double precio;
+    
     public DetallesBoleta() {
     }
 
@@ -27,6 +23,14 @@ public class DetallesBoleta {
         this.Importe = Importe;
     }
 
+    public DetallesBoleta(String IDBoleta, String nombreProducto, int Cantidad, double precio, String imagen) {
+        this.IDBoleta = IDBoleta;
+        this.nombreProducto = nombreProducto;
+        this.Cantidad = Cantidad;
+        this.precio = precio;
+        this.imagen = imagen;
+    }
+
     public String getIDBoleta() {
         return IDBoleta;
     }
@@ -34,7 +38,7 @@ public class DetallesBoleta {
     public void setIDBoleta(String IDBoleta) {
         this.IDBoleta = IDBoleta;
     }
-
+    
     public String getIDProducto() {
         return IDProducto;
     }
@@ -66,6 +70,28 @@ public class DetallesBoleta {
     public void setImporte(double Importe) {
         this.Importe = Importe;
     }
-    
-    
+
+    public String getNombreProducto() {
+        return nombreProducto;
+    }
+
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }    
 }

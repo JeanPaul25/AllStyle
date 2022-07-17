@@ -63,7 +63,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" onclick="servletNeutro('CRUDAdministrador','Dashboard')">
+                            <a class="nav-link" onclick="servletNeutro('servletOrdenes','ListarOrdenes')">
                                 <span data-feather="file"></span>
                                 ORDEN
                             </a>
